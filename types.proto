@@ -1,0 +1,14 @@
+syntax = "proto3";
+package sstable;
+
+// Simple key-value protocol buffer.
+message KeyValue {
+    string key = 1;
+    string value = 2;
+}
+
+// Index offset record.
+message IndexRecord {
+    string key = 1;
+    int64 offset = 2;
+}
