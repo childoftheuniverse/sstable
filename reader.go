@@ -98,7 +98,7 @@ func (r *Reader) cacheEntryIndex(ctx context.Context) error {
 			}
 
 			// Go back to the beginning of the index.
-			if err = sk.Seek(ctx, 0); err != nil {
+			if _, err = sk.Seek(ctx, 0, io.SeekStart); err != nil {
 				return err
 			}
 			r.idx_offset = 0
@@ -172,7 +172,7 @@ func (r *Reader) SeekTo(ctx context.Context, offset int64) error {
 	sk, ok = r.orig_in.(filesystem.Seeker)
 	if ok {
 		// Just tell the seeker to go to that position.
-		err = sk.Seek(ctx, offset)
+		_, err = sk.Seek(ctx, offset, io.SeekStart)
 		if err != nil {
 			r.offset = offset
 		}
@@ -291,7 +291,7 @@ func (r *Reader) indexLookup(ctx context.Context, key string) (int64, error) {
 			}
 
 			// Go back to the beginning of the index.
-			sk.Seek(ctx, 0)
+			sk.Seek(ctx, 0, io.SeekStart)
 			r.idx_offset = 0
 		}
 
