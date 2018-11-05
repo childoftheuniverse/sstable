@@ -228,7 +228,7 @@ func TestWriteKeyOrderViolation(t *testing.T) {
 
 	err = writer.WriteString(ctx, "test2", "data3")
 	if err != nil {
-		t.Errorf("Unexpected error writing second record to same key: ", err)
+		t.Errorf("Unexpected error writing second record to same key: %s", err)
 	}
 }
 
